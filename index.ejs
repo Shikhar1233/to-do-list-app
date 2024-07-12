@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/styles/style.css" />
+  <title>To Do List</title>
+</head>
+
+<body>
+  <div class="box" id="heading">
+    <h1>ToDo List , Woooo Hoooooo</h1>
+  </div>
+  <div class="box box-info">
+    <h2>Make Your Own List</h2>
+    <p>Or Click Here to Go To The Home List</p>
+    <div class="workSpace-buttons">
+      <a href="/list/home" class="btn">Home List</a>
+      <div class="list-button">
+        <% userLists.forEach(list =>{ %> <%if(list['List Name'].length != 0)
+          {%>
+        <a href="/list/<%= list['List Name'] %>" class="btn">
+          <form action="/workDelete" method="post">
+            <input type="checkbox" name="workSpace" value="<%= list._id %>" onchange="this.form.submit()" />
+            <%=list['List Name'] %>
+          </form>
+        </a>
+        <%} else{return} %> <% } ) %> %>
+      </div>
+    </div>
+    <form action="/" method="post">
+      <input type="text" name="ListName-input" id="" />
+      <input type="submit" value="Add List" class="btn form-btn" />
+    </form>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To Do List</title>
+    <link rel="stylesheet" href="../styles/lists.css" />
+</head>
+
+<body>
+
+    <div class="box" id="heading">
+        <h1><%= currentDay %></h1>
+        <div class="listTitle">
+            <% if (typeof listTitle !== 'undefined') {%>
+            <p class="list-name"><%= listTitle %></p>
+            <% } %>
+
+        </div>
+        <a href="/" class="home-btn">Home</a>
+    </div>
+
+
+    <div class="box">
+        <% items.forEach(item =>{ %> <%if(item.name.length != 0) {%>
+        <form action="/delete" method="post">
+            <div class="item">
+                <input type="checkbox" name="item-checkbox" value="<%= item._id %>" onchange="this.form.submit()">
+                <p><%= item.name  %></p>
+            </div>
+            <input type="hidden" name="ListName" value="<%= typeof listTitle !== 'undefined' ? listTitle : ""  %>">
+
+        </form>
+        <%} else{return} %> <% } ) %>
+
+        <form action="/list/home" method="post" class="item">
+            <input type="text" name="newItem" id="" placeholder="New Item" class="text-input" autocomplete="off" />
+            <button type="submit" name="currentList" value="<%= typeof listTitle !== 'undefined' ? listTitle : "" %>"
+                class="add-btn">+</button>
+        </form>
+    </div>
+
+
+</body>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+
+</html>
